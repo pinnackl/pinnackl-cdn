@@ -1,0 +1,21 @@
+# .htaccess
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+Options -MultiViews
+RewriteEngine On
+
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://cdn.pinnackl.com/$1 [R,L]
+
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    #RewriteBase /cdn/web
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
