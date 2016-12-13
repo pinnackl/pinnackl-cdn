@@ -13,6 +13,15 @@ class Cdn
     {
         $success = array();
         $error = array();
+
+        $method = $request->getMethod();
+        if ($method != "POST") {
+            return $app->json(array(
+                "success" => $success,
+                "error" => $error,
+            ), 200);
+        }
+
         $imagePath = realpath(__DIR__.'/../../../web/images');
         $target_dir = $imagePath . "/";
         $target_file = $target_dir . basename($request->files->get('cover')->getClientOriginalName());
@@ -34,7 +43,7 @@ class Cdn
             $uploadOk = 0;
         }
         // Check file size
-        if ($request->files->get('cover')->getSize() > 500000) {
+        if ($request->files->get('cover')->getSize() > 21000000) {
             $error[] = "Sorry, your file is too large.";
             $uploadOk = 0;
         }
