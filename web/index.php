@@ -1,7 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+header("Access-Control-Allow-Origin: *");
 $loader = require __DIR__.'/../vendor/autoload.php';
 $loader->add('Pinnackl\Controller', realpath(__DIR__.'/..').'/src');
 
@@ -21,5 +21,7 @@ $app->get('/', function () {
 $app->get('/api/images', $toController('Cdn', 'show'));
 
 $app->match('/api/images/upload', $toController('Cdn', 'upload'));
+
+$app->match('/api/avatars/upload', $toController('Cdn', 'avatar'));
 
 $app->run();
